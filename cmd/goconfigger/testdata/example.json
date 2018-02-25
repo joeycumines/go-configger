@@ -1,0 +1,12 @@
+{
+  "array": [
+    1,
+    2,
+    3
+  ],
+  "unique": true,
+  "nested": {
+    "overridden": 9.5,
+    "more": [0.1, 0.2]
+  }
+}

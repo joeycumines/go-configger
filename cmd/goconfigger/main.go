@@ -27,11 +27,11 @@ var (
       FORMAT: json|yaml|env
         if provided, FORMAT will override the file extension of PATH
       PATH: a valid path to a valid config file`
-	AppAction    = appAction
-	AppArgs      = os.Args
-	AppFlags     = appFlags
-	AppFormats   = appFormats
-	AppParser    = appParser
+	AppAction  = appAction
+	AppArgs    = os.Args
+	AppFlags   = appFlags
+	AppFormats = appFormats
+	AppParser  = appParser
 )
 
 func main() {
@@ -126,7 +126,17 @@ func (m Mode) merge(a, b interface{}, path []string) interface{} {
 					continue
 				}
 
-				result = append(result, m.merge(nil, vA, newPath))
+				if i == len(result) {
+					// append case
+					result = append(result, m.merge(nil, vA, newPath))
+					continue
+				}
+
+				if i >= len(result) {
+					continue
+				}
+
+				result[i] = m.merge(nil, vA, newPath)
 			}
 		}
 		if tB != nil {
@@ -137,7 +147,17 @@ func (m Mode) merge(a, b interface{}, path []string) interface{} {
 					continue
 				}
 
-				result = append(result, m.merge(nil, vB, newPath))
+				if i == len(result) {
+					// append case
+					result = append(result, m.merge(nil, vB, newPath))
+					continue
+				}
+
+				if i >= len(result) {
+					continue
+				}
+
+				result[i] = m.merge(nil, vB, newPath)
 			}
 		}
 
@@ -173,7 +193,7 @@ func appAction(c *cli.Context) error {
 
 	// handle mode
 	mode := make(Mode)
-	for _, included := range c.StringSlice("whitelist") {
+	for _, included := range c.StringSlice("whitelist") { // TODO: implement whitelist
 		mode.Define(included)
 		mode[included].Whitelist = true
 	}

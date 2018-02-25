@@ -1,0 +1,7 @@
+unique_yaml: 14.64
+array:
+  - 11
+  - 22
+nested:
+  overridden: "something"
+  another: {}
