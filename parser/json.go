@@ -15,7 +15,7 @@ func JSONRead(r io.Reader) (interface{}, error) {
 }
 
 func JSONWrite(data interface{}, w io.Writer) error {
-	result, err := json.Marshal(data)
+	result, err := json.MarshalIndent(data, "", "  ")
 	if err != nil {
 		return err
 	}

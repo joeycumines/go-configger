@@ -2,9 +2,12 @@ package parser
 
 import "io"
 
-// constants for the type of file
+// Format is an identifier for config format
+type Format uint
+
+// constants for formats
 const (
-	Auto = iota
+	Auto Format = iota
 	JSON
 	YAML
 	Env

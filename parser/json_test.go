@@ -30,8 +30,10 @@ func JSONTestCases() []*RWTestCase {
 			Writer: JSONWrite,
 		},
 		{
-			Raw:   `{ "one": 1 }`,
-			Clean: `{"one":1}`,
+			Raw: `{ "one": 1 }`,
+			Clean: `{
+  "one": 1
+}`,
 			Parsed: map[string]interface{}{
 				"one": float64(1),
 			},

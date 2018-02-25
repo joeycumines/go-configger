@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-type Config map[int]Def
+type Config map[Format]Def
 
 type Def struct {
 	Reader
@@ -46,17 +46,17 @@ func (d Def) Read(r io.Reader) (interface{}, error) {
 	return d.Reader(r)
 }
 
-func (d Def) Write(data interface{}, w io.Writer) (int, error) {
+func (d Def) Write(data interface{}, w io.Writer) error {
 	if w == nil {
-		return 0, errors.New("nil writer")
+		return errors.New("nil writer")
 	}
 	if d.Writer == nil {
-		return 0, errors.New("undefined writer")
+		return errors.New("undefined writer")
 	}
-	return d.Write(data, w)
+	return d.Writer(data, w)
 }
 
-func (c Config) Read(format int, r io.Reader) (interface{}, error) {
+func (c Config) Read(format Format, r io.Reader) (interface{}, error) {
 	def, ok := c[format]
 	if !ok {
 		return nil, fmt.Errorf("undefined format #%d", format)
@@ -64,10 +64,10 @@ func (c Config) Read(format int, r io.Reader) (interface{}, error) {
 	return def.Read(r)
 }
 
-func (c Config) Write(format int, data interface{}, w io.Writer) (int, error) {
+func (c Config) Write(format Format, data interface{}, w io.Writer) error {
 	def, ok := c[format]
 	if !ok {
-		return 0, fmt.Errorf("undefined format #%d", format)
+		return fmt.Errorf("undefined format #%d", format)
 	}
 	return def.Write(data, w)
 }
