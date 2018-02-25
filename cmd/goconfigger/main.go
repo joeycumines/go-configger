@@ -22,7 +22,11 @@ const (
 var (
 	AppName      = `goconfigger`
 	AppUsage     = `output a modified configuration file, allowing merging, modification, and conversion`
-	AppUsageText = ``
+	AppUsageText = `goconfigger [OPTIONS] [--] CONFIG [CONFIG...]
+    CONFIG: [--FORMAT ]PATH
+      FORMAT: json|yaml|env
+        if provided, FORMAT will override the file extension of PATH
+      PATH: a valid path to a valid config file`
 	AppAction    = appAction
 	AppArgs      = os.Args
 	AppFlags     = appFlags
@@ -51,7 +55,7 @@ type Node struct {
 	Blacklist bool
 }
 
-type Mode map[string]Node
+type Mode map[string]*Node
 
 func (m Mode) Included(s string) bool {
 	if m == nil {
@@ -65,6 +69,16 @@ func (m Mode) Included(s string) bool {
 		return true
 	}
 	return !node.Blacklist
+}
+
+func (m Mode) Define(s string) bool {
+	if _, ok := m[s]; ok {
+		return false
+	}
+	m[s] = &Node{
+		Path: s,
+	}
+	return true
 }
 
 func (m Mode) merge(a, b interface{}, path []string) interface{} {
@@ -159,6 +173,14 @@ func appAction(c *cli.Context) error {
 
 	// handle mode
 	mode := make(Mode)
+	for _, included := range c.StringSlice("whitelist") {
+		mode.Define(included)
+		mode[included].Whitelist = true
+	}
+	for _, excluded := range c.StringSlice("blacklist") {
+		mode.Define(excluded)
+		mode[excluded].Blacklist = true
+	}
 
 	// handle args
 	for i := 0; i < len(args); i++ {
@@ -247,6 +269,14 @@ func appFlags() []cli.Flag {
 		cli.StringFlag{
 			Name:  "format,f",
 			Usage: "target format for the output, one of (json, yaml, env)",
+		},
+		cli.StringSliceFlag{
+			Name:  "whitelist,include,i,w",
+			Usage: "whitelisted paths (dot notation) will always be included",
+		},
+		cli.StringSliceFlag{
+			Name:  "blacklist,excluded,e,b",
+			Usage: "blacklisted paths (dot notation) will be excluded unless whitelisted",
 		},
 	}
 }
