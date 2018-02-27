@@ -48,8 +48,7 @@ func TestSuccess(t *testing.T) {
   },
   "unique": true,
   "unique_yaml": 14.64
-}
-`,
+}`,
 			Code: 0,
 		},
 		{
@@ -69,7 +68,6 @@ nested:
   overridden: 9.5
 unique: true
 unique_yaml: 14.64
-
 `,
 			Code: 0,
 		},
@@ -97,8 +95,7 @@ unique_yaml: 14.64
   },
   "unique": true,
   "unique_yaml": 14.64
-}
-`,
+}`,
 			Code: 0,
 		},
 		{
@@ -120,8 +117,7 @@ unique_yaml: 14.64
     22
   ],
   "unique": true
-}
-`,
+}`,
 			Code: 0,
 		},
 		{
@@ -133,8 +129,7 @@ unique_yaml: 14.64
 			Expected: `four="34"
 one="11"
 three="33"
-two="22"
-`,
+two="22"`,
 			Code: 0,
 		},
 		{

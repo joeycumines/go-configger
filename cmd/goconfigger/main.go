@@ -279,7 +279,7 @@ func appAction(c *cli.Context) error {
 	if err := appParser.Write(targetFormat, data, buffer); err != nil {
 		return cli.NewExitError(fmt.Sprintf("unable to output to format %v: %s", targetFormat, err.Error()), CodeWriteError)
 	}
-	fmt.Println(buffer.String())
+	fmt.Print(buffer.String())
 
 	return nil
 }
