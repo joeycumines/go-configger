@@ -11,6 +11,7 @@ const (
 	JSON
 	YAML
 	Env
+	EnvSimple
 )
 
 // Reader loads a given file format into memory, into the same possible types as json.Unmarshal(data, anInterface).

@@ -134,6 +134,19 @@ two="22"`,
 		},
 		{
 			Args: []string{
+				pkgPath + `/testdata/simple-noend.env-simple`,
+				pkgPath + `/testdata/simple.json`,
+				pkgPath + `/testdata/simple.yml`,
+			},
+			Expected: `four=34
+one=11
+three=33
+two=22
+`,
+			Code: 0,
+		},
+		{
+			Args: []string{
 			},
 			Expected: ``,
 			Code:     CodeNoTargets,

@@ -17,7 +17,7 @@ var Default Config
 
 func init() {
 	Default = Config{
-		Auto: Def{// TODO: implement this
+		Auto: Def{ // TODO: implement this
 			Reader: nil,
 			Writer: nil,
 		},
@@ -32,6 +32,10 @@ func init() {
 		Env: Def{
 			Reader: EnvRead,
 			Writer: EnvWrite,
+		},
+		EnvSimple: Def{
+			Reader: EnvSimpleRead,
+			Writer: EnvSimpleWrite,
 		},
 	}
 }

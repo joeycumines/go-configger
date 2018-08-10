@@ -25,7 +25,7 @@ var (
 	AppUsage     = `output a modified configuration file, allowing merging, modification, and conversion`
 	AppUsageText = `goconfigger [OPTIONS] [--] CONFIG [CONFIG...]
     CONFIG: [--FORMAT ]PATH
-      FORMAT: json|yaml|env
+      FORMAT: json|yaml|env|yml|env-simple
         if provided, FORMAT will override the file extension of PATH
       PATH: a valid path to a valid config file`
 	AppAction  = appAction
@@ -290,7 +290,7 @@ func appFlags() []cli.Flag {
 	return []cli.Flag{
 		cli.StringFlag{
 			Name:  "format,f",
-			Usage: "target format for the output, one of (json, yaml, env)",
+			Usage: "target format for the output, one of (json, yaml, env, yml, env-simple)",
 		},
 		cli.StringSliceFlag{
 			Name:  "whitelist,include,i,w",
@@ -305,10 +305,11 @@ func appFlags() []cli.Flag {
 
 func appFormats() map[string]parser.Format {
 	return map[string]parser.Format{
-		"env":  parser.Env,
-		"json": parser.JSON,
-		"yaml": parser.YAML,
-		"yml":  parser.YAML,
+		"env":        parser.Env,
+		"json":       parser.JSON,
+		"yaml":       parser.YAML,
+		"yml":        parser.YAML,
+		"env-simple": parser.EnvSimple,
 	}
 }
 
