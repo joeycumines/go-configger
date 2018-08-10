@@ -21,6 +21,7 @@ const (
 
 var (
 	AppName      = `goconfigger`
+	AppVersion   = `1.0.0`
 	AppUsage     = `output a modified configuration file, allowing merging, modification, and conversion`
 	AppUsageText = `goconfigger [OPTIONS] [--] CONFIG [CONFIG...]
     CONFIG: [--FORMAT ]PATH
@@ -41,6 +42,7 @@ func main() {
 	app.Flags = AppFlags()
 	app.Action = AppAction
 	app.UsageText = AppUsageText
+	app.Version = AppVersion
 	app.Run(AppArgs)
 }
 
