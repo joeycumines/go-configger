@@ -1,8 +1,8 @@
 package parser
 
 import (
-	"io"
 	"encoding/json"
+	"io"
 )
 
 func JSONRead(r io.Reader) (interface{}, error) {

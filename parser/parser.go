@@ -2,8 +2,8 @@ package parser
 
 import (
 	"errors"
-	"io"
 	"fmt"
+	"io"
 )
 
 type Config map[Format]Def

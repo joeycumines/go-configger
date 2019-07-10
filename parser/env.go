@@ -1,11 +1,11 @@
 package parser
 
 import (
-	"io"
-	"github.com/joho/godotenv"
 	"errors"
-	"strconv"
 	"fmt"
+	"github.com/joho/godotenv"
+	"io"
+	"strconv"
 )
 
 func EnvRead(r io.Reader) (interface{}, error) {

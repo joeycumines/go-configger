@@ -1,14 +1,14 @@
 package parser
 
 import (
-	"runtime"
-	"path"
-	"github.com/go-test/deep"
-	"fmt"
-	"strings"
-	"encoding/json"
-	"io/ioutil"
 	"bytes"
+	"encoding/json"
+	"fmt"
+	"github.com/go-test/deep"
+	"io/ioutil"
+	"path"
+	"runtime"
+	"strings"
 )
 
 const testDataDir = "testdata"

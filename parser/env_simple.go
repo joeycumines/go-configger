@@ -1,11 +1,11 @@
 package parser
 
 import (
-	"io"
-	"strconv"
-	"fmt"
 	"errors"
+	"fmt"
+	"io"
 	"sort"
+	"strconv"
 )
 
 func EnvSimpleRead(r io.Reader) (interface{}, error) {

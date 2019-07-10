@@ -1,9 +1,9 @@
 package parser
 
 import (
-	"io"
-	"gopkg.in/yaml.v2"
 	"fmt"
+	"gopkg.in/yaml.v2"
+	"io"
 )
 
 func YAMLRead(r io.Reader) (interface{}, error) {
