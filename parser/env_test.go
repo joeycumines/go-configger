@@ -11,7 +11,7 @@ func EnvTestCases() []*RWTestCase {
 			Clean: `ONE="one"
 QUOTED="    A  B  C  "
 SPACED="A  B  C"
-TWO="2"
+TWO=2
 Three="four, five"`,
 			Parsed: map[string]interface{}{
 				"ONE":    "one",

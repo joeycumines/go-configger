@@ -130,10 +130,10 @@ unique_yaml: 14.64
 				pkgPath + `/testdata/simple.json`,
 				pkgPath + `/testdata/simple.yml`,
 			},
-			Expected: `four="34"
-one="11"
-three="33"
-two="22"`,
+			Expected: `four=34
+one=11
+three=33
+two=22`,
 			Code: 0,
 		},
 		{
@@ -150,8 +150,7 @@ two=22
 			Code: 0,
 		},
 		{
-			Args: []string{
-			},
+			Args:     []string{},
 			Expected: ``,
 			Code:     CodeNoTargets,
 		},
